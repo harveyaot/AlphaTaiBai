@@ -38,7 +38,6 @@ class ShiwenBodySpider(scrapy.Spider):
                 yield scrapy.Request(self.url %(site_id, 'shang'))
 
     def parse(self, response):
-        print response.text
         obj1 = pat_id.search(response.url)
         obj2 = pat_src.search(response.url)
         if obj1 and obj2:

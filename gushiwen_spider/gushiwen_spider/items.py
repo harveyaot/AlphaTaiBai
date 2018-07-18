@@ -34,3 +34,12 @@ class ShiwenItem(Item):
     fanyi = Field()
     zhushi = Field()
     shangxi = Field()
+
+
+class MingJuItem(Item):
+    sent = Field()
+    sent_href = Field()
+    src = Field()
+    src_href = Field()
+
+
