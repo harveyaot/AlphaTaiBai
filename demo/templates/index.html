@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Intelligent Poet: Alpha Taibai</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+
+<div class="jumbotron vertical-center"> 
+    <div class=container>
+        
+        <div class=row>
+            <div class="col-md-6 col-lg-6">
+                <h2>Alpha Taibai Demo</h2>
+            </div>
+        </div>
+        <div class=row style="margin-top: 15px">
+            <div class="col-md-6 col-lg-6">
+                <form action="/upload" method="post" enctype="multipart/form-data" >
+                    <span class="btn btn-default btn-file">
+                            Browse <input type="file" name="image">
+                    </span>
+                    <input type="submit" value="Upload" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+
+        {% if filename %}
+            <div class=row style="margin-top:15px">
+                <div class='col-md-6 col-lg-6'>
+                    <img src="{{filename}}" class="img-rounded" alt="{{filename}}" width="100%"> 
+                    <ul class="list-group" style="margin-top: 10px">
+                        {% for sent in sents %}
+                            <li class="list-group-item">{{sent}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class='row'>
+            {% if init %}
+                <div class='col-md-6 col-lg-6'>
+                    {% if invalidImage %}
+                        <div class="alert alert-danger" style="margin-top:18px;">
+                            <strong>Error</strong> Your image contain invalid content !
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success" style="margin-top:18px;">
+                            <strong>Success!</strong> Your image was upload successfully
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+</body>
