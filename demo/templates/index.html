@@ -13,12 +13,12 @@
     <div class=container>
         
         <div class=row>
-            <div class="col-md-6 col-lg-6">
+            <div class="col-md-7 col-lg-7">
                 <h2>Alpha Taibai Demo</h2>
             </div>
         </div>
         <div class=row style="margin-top: 15px">
-            <div class="col-md-6 col-lg-6">
+            <div class="col-md-7 col-lg-7">
                 <form action="/upload" method="post" enctype="multipart/form-data" >
                     <span class="btn btn-default btn-file">
                             Browse <input type="file" name="image">
@@ -30,11 +30,11 @@
 
         {% if filename %}
             <div class=row style="margin-top:15px">
-                <div class='col-md-6 col-lg-6'>
+                <div class='col-md-7 col-lg-7'>
                     <img src="{{filename}}" class="img-rounded" alt="{{filename}}" width="100%"> 
                     <ul class="list-group" style="margin-top: 10px">
                         {% for sent in sents %}
-                            <li class="list-group-item">{{sent}}</li>
+                        <li class="list-group-item">{{sent[0]}}<span class="badge"> {{sent[3]}}</span> <a href="{{sent[2]}}" class="badge badge-light">{{sent[1]}}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -43,7 +43,7 @@
 
         <div class='row'>
             {% if init %}
-                <div class='col-md-6 col-lg-6'>
+                <div class='col-md-7 col-lg-7'>
                     {% if invalidImage %}
                         <div class="alert alert-danger" style="margin-top:18px;">
                             <strong>Error</strong> Your image contain invalid content !

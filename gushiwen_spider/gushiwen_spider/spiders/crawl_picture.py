@@ -6,7 +6,8 @@ import json
 
 from scrapy.conf import settings
 
-DATA_FILE = '../data/sent_pic_urls.txt'
+#DATA_FILE = '../data/sent_pic_urls.txt'
+DATA_FILE = "../data/sent_pic_urls_top1k.txt"
 
 class ImageCrawlerSpider(scrapy.Spider):
     name = 'image'
@@ -34,7 +35,7 @@ class ImageCrawlerSpider(scrapy.Spider):
             ending = suffix
         else:
             print(ending)
-        path = "%s/%s.%s" %('images', name, ending)
+        path = "%s/%s.%s" %('images_top1k', name, ending)
         with open(path, 'wb') as fout:
             fout.write(response.body)
 
