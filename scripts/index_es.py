@@ -105,6 +105,6 @@ def index_sents(filepath):
     return ds
 
 if __name__ == "__main__":
-    #creat_mapping("test_01")
+    creat_mapping("test_02")
     index_sents("../data/mingju.csv")
     #print(hash("adsf"))
