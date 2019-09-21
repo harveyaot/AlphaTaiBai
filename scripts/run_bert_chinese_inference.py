@@ -134,7 +134,7 @@ def convert_sents_to_features(examples, max_seq_length,
         assert len(input_mask) == max_seq_length
         assert len(segment_ids) == max_seq_length
 
-        if ex_index < 5:
+        if ex_index < 5 and False:
             print("*** Example ***")
             print("guid: %s" % (ex_index))
             #print("tokens: %s" % " ".join(
