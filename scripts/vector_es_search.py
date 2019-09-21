@@ -1,6 +1,7 @@
 import requests
 import json
-url = "http://mpgpu02.southcentralus.cloudapp.azure.com:9200/test_01/_search"
+hostname = "localhost"
+url = "http://{}:9200/test_01/_search".format(hostname)
 headers = {'Content-Type': 'application/json'}
 def search_by_vec(vec):
     d = {
@@ -23,7 +24,7 @@ def search_by_vec(vec):
     return resp
 
 def get_vec4query(query):
-    url = "http://mpgpu02.southcentralus.cloudapp.azure.com:8500/api/emb/v1"
+    url = "http://{}:8500/api/emb/v1".format(hostname)
     resp = requests.post(url, json.dumps([query]), headers=headers)
     d = resp.json()
     assert len(d) == 1
