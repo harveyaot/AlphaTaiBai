@@ -19,9 +19,17 @@ MODEL_CLASSES = {
     'xlm': (XLMConfig, XLMForSequenceClassification, XLMTokenizer),
     'roberta': (RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer),
 }
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+n_gpu = torch.cuda.device_count()
+config_class, model_class, tokenizer_class = MODEL_CLASSES['bert']
+model_name = "bert-base-chinese"
+config = config_class.from_pretrained(model_name)
+tokenizer = tokenizer_class.from_pretrained(model_name)
+model = model_class.from_pretrained(model_name)
+model.to(device)# setup devices
 
 
-def inference_batch(model, dataset, batch_size, device):
+def inference_batch(dataset,batch_size=64, model=model, device=device):
     dataloader = DataLoader(dataset, batch_size=batch_size)
     model.eval()
     res = []
@@ -34,7 +42,7 @@ def inference_batch(model, dataset, batch_size, device):
             outputs = model.bert(**inputs)
             seq_encoding = outputs[0]
             res.append(seq_encoding)
-    return res
+    return torch.cat(res, 0)
 
 def read_sents(file_path):
     sents = []
@@ -62,7 +70,7 @@ class InputFeatures(object):
         self.segment_ids = segment_ids
         
 def convert_sents_to_features(examples, max_seq_length,
-                                 tokenizer,
+                                 tokenizer=tokenizer,
                                  cls_token_at_end=False,
                                  cls_token='[CLS]',
                                  cls_token_segment_id=1,
@@ -141,24 +149,14 @@ def convert_sents_to_features(examples, max_seq_length,
                               segment_ids=segment_ids))
     return features
 
-# setup devices
+
 if __name__ == "__main__":
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    n_gpu = torch.cuda.device_count()
-    config_class, model_class, tokenizer_class = MODEL_CLASSES['bert']
-    model_name = "bert-base-chinese"
-    config = config_class.from_pretrained(model_name)
-    tokenizer = tokenizer_class.from_pretrained(model_name)
-    model = model_class.from_pretrained(model_name)
-    model.to(device)
+
 
     sents = read_sents("./mingju.csv")
-    print("Reading Sents with number: {}".format(len(sents)))
+    print("reading sents with number: {}".format(len(sents)))
     #logger.info()
     features = convert_sents_to_features(sents, 64, tokenizer)
-    """
-    dataset = convert_features_dataset(features)
-    res = inference_batch(model, dataset, 64, device)
-    
+    dataset = convert_features_dataset(features[:10])
+    res = inference_batch(dataset, 64)
     print(res)
-    """
