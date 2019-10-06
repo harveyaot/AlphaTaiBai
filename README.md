@@ -3,8 +3,8 @@ An AI Poet AlphaTaiBai automatically compose poems for your modern words, voices
 
 [Portal](http://www.alphataibai.com)
 
-![v0 verison Demo](./images/demo_v0.png)
-![v1 verison Demo](./images/demo_v1.jpg)
+![v0 verison Demo](./images/demo_v0.png =400*)
+![v1 verison Demo](./images/demo_v1.jpg =400*)
 
 ## Resources
 * [中国古诗文网](http://www.gushiwen.org/) 可以得到翻译和词语注释
