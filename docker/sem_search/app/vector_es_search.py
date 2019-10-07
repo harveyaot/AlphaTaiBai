@@ -24,7 +24,7 @@ def search_by_vec(vec):
     return resp
 
 def get_vec4query(query):
-    url = "http://{}:8500/api/emb/v1".format(hostname)
+    url = "http://{}:8500/api/emb/v2".format(hostname)
     resp = requests.post(url, json.dumps([query]), headers=headers)
     d = resp.json()
     assert len(d) == 1

@@ -16,8 +16,8 @@ def sem_search():
     sent = request.json
     vec = get_vec4query(sent)
     resp = search_by_vec(vec)
-    logger.info(log_request_record(sent, resp))
     if resp.ok:
+        logger.info(log_request_record(sent, resp.json()))
         return resp.json()
     else:
         return resp.text
@@ -34,8 +34,8 @@ def format_resp(resp):
         for hit in hits:
             sent = hit["_source"]["sent"]
             score = hit['_score']
-            res.append("{}|{0:.2f}".format(sent,score))
-        return "$".join(res)
+            res.append("%s$%.2f" %(sent, score))
+        return "|".join(res)
     else:
         return None
 
