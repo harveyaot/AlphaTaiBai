@@ -2,6 +2,7 @@ import requests
 import json
 headers = {'Content-Type': 'application/json'}
 hostname = "loaclhost"
+INDEX="test_02"
 def creat_mapping(index_name):
     url = "http://{}:9200/".format(hostname) + index_name
     mapping = {
@@ -95,7 +96,7 @@ def call_for_embs_and_index(sents, ds, batch_size):
         assert len(d) == len(batch)
         for j in range(len(d)):
             ds[j]['bert-chinese-emb'] = d[j]
-        index_sents_to_es(ds[i*batch_size: (i+1)*batch_size], 'test_01')
+        index_sents_to_es(ds[i*batch_size: (i+1)*batch_size], INDEX)
     return ds
 
 def index_sents(filepath):
@@ -105,6 +106,6 @@ def index_sents(filepath):
     return ds
 
 if __name__ == "__main__":
-    creat_mapping("test_02")
+    creat_mapping(INDEX)
     index_sents("../data/mingju.csv")
     #print(hash("adsf"))
