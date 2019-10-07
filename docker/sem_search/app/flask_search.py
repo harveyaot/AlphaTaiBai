@@ -12,10 +12,21 @@ logger = logging.getLogger('search')
 app = Flask(__name__)
 
 @app.route('/api/sem_search/v1', methods = ['POST'])
-def sem_search():
+def sem_search_v1():
     sent = request.json
     vec = get_vec4query(sent)
     resp = search_by_vec(vec)
+    if resp.ok:
+        logger.info(log_request_record(sent, resp.json()))
+        return resp.json()
+    else:
+        return resp.text
+
+@app.route('/api/sem_search/v2', methods = ['POST'])
+def sem_search_v2():
+    sent = request.json
+    vec = get_vec4query(sent, "v2")
+    resp = search_by_vec(vec, "v2")
     if resp.ok:
         logger.info(log_request_record(sent, resp.json()))
         return resp.json()
