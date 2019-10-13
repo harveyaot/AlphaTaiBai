@@ -2,7 +2,7 @@ import requests
 import json
 headers = {'Content-Type': 'application/json'}
 hostname = "loaclhost"
-INDEX="test_02"
+INDEX="test_01"
 def creat_mapping(index_name):
     url = "http://{}:9200/".format(hostname) + index_name
     mapping = {
@@ -54,7 +54,7 @@ def index_sents_to_es(ds, index, batch_size=100):
         data = "\n".join([json.dumps(d) for d in bulk]) + '\n'
         print(i,len(batch))
         resp = requests.post(url, data=data, headers=headers)
-    print(resp.text)
+        print(resp.text)
 
 import hashlib
 def hash(content):
@@ -85,18 +85,20 @@ def read_sents(file_path):
     return sents, ds
 
 def call_for_embs_and_index(sents, ds, batch_size):
+    assert len(ds) == len(sents)
     url = "http://{}:8500/api/emb/v1".format(hostname)
     step = int(len(sents) / batch_size) + 1
     for i in range(step):
         batch = sents[i*batch_size: (i+1)*batch_size]
+        sub_ds = ds[i*batch_size: (i+1)*batch_size]
         print(i,len(batch))
         print("calling {}".format(i))
         resp = requests.post(url, json.dumps(batch), headers=headers)
         d = resp.json()
         assert len(d) == len(batch)
         for j in range(len(d)):
-            ds[j]['bert-chinese-emb'] = d[j]
-        index_sents_to_es(ds[i*batch_size: (i+1)*batch_size], INDEX)
+            sub_ds[j]['bert-chinese-emb'] = d[j]
+        index_sents_to_es(sub_ds, INDEX)
     return ds
 
 def index_sents(filepath):
@@ -106,6 +108,6 @@ def index_sents(filepath):
     return ds
 
 if __name__ == "__main__":
-    creat_mapping(INDEX)
+    #creat_mapping(INDEX)
     index_sents("../data/mingju.csv")
     #print(hash("adsf"))
