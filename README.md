@@ -3,9 +3,13 @@ An AI Poet AlphaTaiBai automatically compose poems for your modern words, voices
 
 [Portal](http://www.alphataibai.com)
 
+
+
 <img src="./images/demo_v0.png" width="400"> 
 
 <img src="./images/demo_v1.jpg" width="400"> 
+
+<img src="./images/gh_a24a5f8ce664_258.jpg"> 
 
 
 ## Resources
