@@ -68,7 +68,8 @@ namespace AlphaTaibai.ImageCrawler
                     Bitmap bmp;
 
                     // determine the image name
-                    string formatSuffix = (msg.ImageUrl.EndsWith("jpeg") || msg.ImageUrl.EndsWith("jpg")) ? ".jpg" : ".png";
+                    //string formatSuffix = (msg.ImageUrl.EndsWith("jpeg") || msg.ImageUrl.EndsWith("jpg")) ? ".jpg" : ".png";
+                    string formatSuffix = (msg.ImageUrl.EndsWith("png")) ? ".png" : ".jpg";
                     string shortname = String.Format("{0:X}", msg.ImageUrl.GetHashCode());
                     string shortnameTH = String.Format("{0:X}_th", msg.ImageUrl.GetHashCode());
 

@@ -1,3 +1,4 @@
 pymongo=3.6
 scrapy=1.5
 scrapy_proxies
+azure-storage-queue
