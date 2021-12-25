@@ -10,6 +10,7 @@ namespace AlphaTaibai.Models{
         public string ImageUrl {get; set;}
         [JsonProperty("add_string_info")]
         public Dictionary<string, string> AddStringInfo {get; set;}
+        [JsonProperty("add_int_info")]
         public Dictionary<string, int> AddIntInfo {get; set;}
     }
     public class SavedImageInfo

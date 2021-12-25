@@ -1,1 +1,3 @@
 *.pyc
+.vscode/
+local.settings.json
