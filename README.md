@@ -32,3 +32,5 @@ An AI Poet AlphaTaiBai automatically compose poems for your modern words, voices
 * [2014:Unifying visual-semantic embeddings with multimodal neural language models](https://arxiv.org/pdf/1411.2539.pdf)
 * [2019:Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks](https://arxiv.org/pdf/1908.10084.pdf)
 * [2019:Pre-Training with Whole Word Masking for Chinese BERT](https://arxiv.org/abs/1906.08101)
+* [Supervised Multimodal Bitransformers for Classifying Images and Text](https://arxiv.org/pdf/1909.02950.pdf)
+* [ViLBERT: Pretraining Task-Agnostic Visiolinguistic Representations for Vision-and-Language Tasks](https://arxiv.org/pdf/1908.02265.pdf)
