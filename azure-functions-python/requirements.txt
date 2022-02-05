@@ -1,0 +1,7 @@
+# Do not include azure-functions-worker as it may conflict with the Azure Functions platform
+
+azure-functions
+requests
+-f https://download.pytorch.org/whl/torch_stable.html
+torch==1.10.2+cpu
+torchvision==0.11.3+cpu
