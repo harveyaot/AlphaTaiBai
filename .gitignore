@@ -1,3 +1,4 @@
 *.pyc
 .vscode/
 local.settings.json
+./example/

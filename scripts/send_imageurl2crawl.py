@@ -36,7 +36,7 @@ mongo_docs = mongo_client[mongo_db][mongo_collection]
 with open("data/mingju.csv", 'r', encoding='utf-8') as fin:
     fin.readline()
     for idx, line in enumerate(fin):
-        if idx < 2416:
+        if idx < 4747:
             continue
         gs = line.split(",")
         assert len(gs) == 4
@@ -64,6 +64,7 @@ with open("data/mingju.csv", 'r', encoding='utf-8') as fin:
                         "add_int_info" : d_int
                     }
                 base64_queue_client.send_message(JSONEncoder().encode(d).encode('utf-8'))
+                
         if doc:
             doc['crawled'] = int(time.time())
             mongo_docs.update_one({'url':gs[1]}, {"$set":doc})
