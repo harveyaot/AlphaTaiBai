@@ -1,0 +1,71 @@
+@charset "UTF-8";
+html {
+  background: #005457;
+  background: linear-gradient(0deg, #005457, #58797a);
+}
+
+body {
+  color: white;
+  height: 100%;
+  max-width: 390px;
+  margin: 0 auto !important;
+  float: none !important;
+}
+
+#hero-img {
+  margin-top: 60px;
+  text-align: center;
+}
+#hero-img img {
+  width: 320px;
+  height: 280px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0.7em;
+}
+#hero-img .upload-btn {
+  position: relative;
+  bottom: 60px;
+  left: -130px;
+}
+#hero-img .upload-btn img {
+  width: 70px;
+  height: 70px;
+}
+
+.result {
+  position: relative;
+  left: calc(50% - 160px);
+  margin-top: -40px;
+  width: 320px;
+  height: 100%;
+}
+.result .item {
+  max-width: 100%;
+  list-style-type: none;
+  background-color: rgba(1, 162, 154, 0.36);
+  font-family: "楷体", "楷体_GB2312";
+  padding: 0.4em;
+  margin-top: 0.6em;
+  border-radius: 0.7em;
+}
+.result .item .sent {
+  font-size: 1.2em;
+}
+.result .item .source {
+  padding-top: 0.4em;
+  font-size: 0.9em;
+  color: #c7ebd7;
+}
+
+.pagination {
+  position: relative;
+  padding-top: 0.8em;
+  left: calc(50% - 50px);
+  fill: #c7ebd7;
+  width: 100px;
+}
+
+#uploadfile1 {
+  display: none;
+}/*# sourceMappingURL=main.css.map */
