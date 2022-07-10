@@ -1,0 +1,5 @@
+uploads/*
+*.pt
+*.pkl
+*.dep
+*.pyc
