@@ -1,21 +1,32 @@
 import shutil
 import os
+import torch
+import requests
+
+from typing import List
 from tempfile import NamedTemporaryFile
 from pathlib import Path
 
-import torch
 from torchvision import transforms
 from typing import Union
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import UploadFile, File
 from fastapi.staticfiles import StaticFiles
-import requests
 from PIL import Image, ImageOps
+
+from fastapi_pagination import Page, add_pagination, paginate
+from pydantic import BaseModel, parse_obj_as
+
+class Item(BaseModel):
+    sent: str
+    source: str
+    score:float
+
 
 app = FastAPI()
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
-
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 def read_root():
@@ -60,8 +71,8 @@ async def create_upload_file(file:UploadFile):
         pil = Image.open(tmp_path).convert('RGB')
         pil = ImageOps.exif_transpose(pil)
         #print(pil.size)
-        pil = transforms.Resize(380)(pil)
-        pil = transforms.CenterCrop((320, 280))(pil)
+        pil = transforms.Resize(500)(pil)
+        pil = transforms.CenterCrop((480, 420))(pil)
         pil.save('./uploads/' + file.filename)
         #print(tmp_path)
         os.remove(tmp_path)
@@ -77,8 +88,15 @@ best_checkpoint = torch.load(model_path, map_location=torch.device('cpu'))
 model.load_state_dict(best_checkpoint["state_dict"])
 model.eval()
 
-@app.get("/imageclf")
+@app.get("/imageclf", response_model=Page[Item])
 async def imageclf(filename:str):
-    predicts = inference(model, "./uploads/" + filename)
-    return {"results":predicts}
+    if filename.startswith('/static'):
+        predicts = inference(model, "." + filename, 200)
+    else:
+        predicts = inference(model, "./uploads/" + filename, 200)
+    res = parse_obj_as(List[Item], predicts)
+    return paginate(res)
+
+# Register
+add_pagination(app)
     

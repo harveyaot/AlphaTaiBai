@@ -1,13 +1,18 @@
 <script setup>
 import Sents from './assets/sents.json'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
+
+let host = "http://localhost:8088"
+let page_size = 20
+
 
 const file = ref(null)
 const counter = ref(0)
 const message = ref("")
-const hero_image = ref("/src/assets/lotus.png")
+const hero_image = ref(host + "/static/lotus.png")
 const repsonse_sents = ref(Sents)
+
 
 function handleFileUpload(event) {
   file.value = event.target.files[0];
@@ -18,7 +23,7 @@ function submitFile() {
   let formData = new FormData();
   formData.append('file', file.value);
   // You should have a server side REST API 
-  axios.post('http://localhost:8088/uploadfile',
+  axios.post(host + '/uploadfile',
     formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -26,8 +31,8 @@ function submitFile() {
   }
   ).then(function (e) {
     console.log(e['data']['filename']);
-    hero_image.value = "http://localhost:8088/uploads/" + e['data']['filename']
-    axios.get("http://localhost:8088/imageclf?filename=" + e['data']['filename'])
+    hero_image.value = host + "/uploads/" + e['data']['filename']
+    axios.get(host + "/imageclf?filename=" + e['data']['filename'] + '&size=20')
     .then((res) => {
         repsonse_sents.value = res.data 
     })
@@ -36,6 +41,13 @@ function submitFile() {
       console.log('FAILURE!!');
     });
 }
+
+onMounted(() => {
+    axios.get(host + "/imageclf?filename=" + "/static/lotus.png" + '&size=20')
+    .then((res) => {
+        repsonse_sents.value = res.data 
+    })
+})
 
 </script>
 
@@ -53,7 +65,7 @@ function submitFile() {
       </div>
     </div>
     <div class="result">
-      <div v-for="sent in repsonse_sents['results']" class="item">
+      <div v-for="sent in repsonse_sents['items']" class="item">
         <div class="sent">{{ sent['sent'] }}</div>
         <div class="source">{{ sent['source'] }}</div>
       </div>
