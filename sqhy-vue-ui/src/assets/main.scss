@@ -73,3 +73,11 @@ body {
 #uploadfile1 {
     display: none;
 }
+.fraction, .top{
+    padding: 0 0.3em;    
+    text-align: center;   
+    .bottom {
+        border-top: 1px solid;
+        display: block;
+    }
+}

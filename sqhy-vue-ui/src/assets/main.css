@@ -68,4 +68,13 @@ body {
 
 #uploadfile1 {
   display: none;
+}
+
+.fraction, .top {
+  padding: 0 0.3em;
+  text-align: center;
+}
+.fraction .bottom, .top .bottom {
+  border-top: 1px solid;
+  display: block;
 }/*# sourceMappingURL=main.css.map */
