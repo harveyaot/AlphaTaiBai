@@ -13,7 +13,7 @@ h11==0.13.0
 idna==3.3
 numpy==1.23.1
 Pillow==9.2.0
-protobuf==3.20.1
+protobuf==3.20.2
 protobuf2pydantic==2021.11.25
 pycodestyle==2.8.0
 pydantic==1.9.0
