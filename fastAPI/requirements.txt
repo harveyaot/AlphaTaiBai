@@ -23,7 +23,7 @@ requests==2.27.1
 shortuuid==1.0.8
 six==1.16.0
 sniffio==1.2.0
-starlette==0.17.1
+starlette==0.25.0
 toml==0.10.2
 torch==1.12.0
 torchvision==0.13.0
